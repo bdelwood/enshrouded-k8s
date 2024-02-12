@@ -1,0 +1,14 @@
+---
+apiVersion: v2
+description: A basic chart to deploy Enshrouded dedicated servers.
+name: enshrouded-k8s
+type: application
+version: 0.1.0
+appVersion: "0.4.0"
+kubeVersion: ">=1.26.0-0"
+sources:
+  - https://github.com/bdelwood/enshrouded-k8s
+keywords:
+  - steam
+  - enshrouded
+

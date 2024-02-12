@@ -1,0 +1,146 @@
+# -- Override the name of the chart.
+# Default is the chart name.
+nameOverride: ""
+
+# -- Override the full name of the chart.
+# Default is a combination of release name and chart name.
+fullnameOverride: ""
+
+# -- Timezone setting for the server.
+tz: "UTC"
+
+image:
+  # -- Container registry for the image.
+  registry: docker.io
+  # -- Image repository
+  repository: mornedhels/enshrouded-server
+  # -- Image pull policy
+  pullPolicy: IfNotPresent
+  # -- Overrides the image tag.
+  # Default is the chart `${appVersion}-proton`.
+  tag: ""
+
+# -- Update strategy for deployments.
+updateStrategy:
+  type: Recreate
+
+service: 
+  # -- Service type (e.g., LoadBalancer, ClusterIP, NodePort)
+  type: LoadBalancer
+
+gameServer:
+  # -- Custom server name.
+  serverName: ""
+  # -- Number of players allowed on the server concurrently.
+  players: 16
+  # -- Name of an existing secret for the server password.
+  existingSecret: ""
+  # -- Server password
+  # If one is not provided or an existing secret it not provided, one will be generated.
+  password: ""
+  service:
+    # -- Service port for the game server.
+    port: 15636
+    # -- (int) Node port for the game server (for NodePort service type).
+    nodePort: 
+  community:
+    # -- Enable if you want your server to show up as a community server.
+    # Exposes the Steam query port.
+    enabled: true
+    service:
+      # -- (int) Service port for a community server.
+      # Defaults to the server port + 1
+      port: 
+      # -- (int) Node port a community server (for NodePort service type).
+      # Defaults to Node port for game server + 1
+      nodePort: 
+  # -- Server IP used Enshrouded server settings
+  serverIP: "0.0.0.0"
+
+  # -- Directory for game saves
+  # sets saveDirectory in game server config
+  saveDir: "./savegame"
+  # -- Directory for logs
+  # sets logDirectory in game server config  
+  logDir: "./logs"
+
+  update:
+    # -- Cron expression for updates.
+    # Defines when the update check should run. The default value checks for updates every half hour.
+    # Use standard cron format.
+    cron_expression: "*/30 * * * *"
+    # -- Check if players are connected before updating. 
+    check_players: false
+
+  backup:
+    # -- Cron expression for backup scheduling.
+    # Defines when the backups should be triggered. The default value schedules
+    # a backup every 15 minutes. Use standard cron format.
+    cron_expression: "*/15 * * * *"
+    # -- Directory for backups. Supports relative and absolute paths.
+    directory: "./backup"
+    # -- Number of backups to keep.
+    # When set to 0, never delete backups
+    max_count: 0
+
+  # -- Which Steam branch to use for the game server.
+  gameBranch: "public"
+  # -- Extra arguments to pass to steamcmd when updating.
+  steamcmdArgs: "validate"
+
+
+
+# -- Define extra environment variables to pass directly to the container.
+# Any env vars which are set by other values will be overridden.
+extraEnv: {}
+
+persistence:
+  # -- Enable or disable persistence.
+  enabled: true
+  # -- Name of an existing persistentVolumeClaim.
+  existingClaim: ""
+  # -- Storage class name for the PVC.
+  storageClassName: ""
+  # -- Access mode for the persistent volume.
+  accessMode: ReadWriteOnce
+  # -- Prevent Helm from deleting the PVC.
+  # Some storageClasses (such as the local-path-provisioner installed by default by k3s) have reclaimPolicy: Delete.
+  preventDelete: true
+  # -- Size of the persistent volume.
+  size: 30Gi
+
+resources:
+  # -- Resource limits (CPU, Memory) for the server.
+  limits:
+    memory: 24Gi
+    cpu: 8
+  # -- Resource requests (CPU, Memory) for the server.
+  requests:
+    memory: 16Gi
+    cpu: 6
+
+serviceAccount:
+  # -- Specifies whether a service account should be created.
+  create: false
+  # -- Annotations to add to the service account.
+  annotations: {}
+  # -- The name of the service account.
+  name: ""
+
+# -- Node selector for pod scheduling.
+nodeSelector: {}
+
+# -- Affinity rules for pod scheduling.
+affinity: {}
+
+# -- Tolerations for pod scheduling.
+tolerations: {}
+
+# -- Annotations to add to the pod.
+podAnnotations: {}
+
+# -- Security context for the pod.
+podSecurityContext: {}
+
+# -- Security context for the pod containers.
+securityContext: {}
