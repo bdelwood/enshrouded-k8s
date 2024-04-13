@@ -2,6 +2,22 @@ apiVersion: v1
 entries:
   enshrouded-k8s:
   - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2024-04-13T23:42:06.412363188Z"
+    description: A basic chart to deploy Enshrouded dedicated servers.
+    digest: 93ab508cc9d8baa5504bdc96315195bb3b304f5c308bdc1ff3c37b780d4704dd
+    keywords:
+    - steam
+    - enshrouded
+    kubeVersion: '>=1.26.0-0'
+    name: enshrouded-k8s
+    sources:
+    - https://github.com/bdelwood/enshrouded-k8s
+    type: application
+    urls:
+    - https://github.com/bdelwood/enshrouded-k8s/releases/download/enshrouded-k8s-0.4.0/enshrouded-k8s-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     appVersion: 1.0.0
     created: "2024-02-18T20:03:29.674267307Z"
     description: A basic chart to deploy Enshrouded dedicated servers.
@@ -49,4 +65,4 @@ entries:
     urls:
     - https://github.com/bdelwood/enshrouded-k8s/releases/download/enshrouded-k8s-0.2.0/enshrouded-k8s-0.2.0.tgz
     version: 0.2.0
-generated: "2024-02-18T20:03:29.67430128Z"
+generated: "2024-04-13T23:42:06.412378417Z"
