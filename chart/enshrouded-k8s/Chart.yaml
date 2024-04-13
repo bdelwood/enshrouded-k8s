@@ -3,8 +3,8 @@ apiVersion: v2
 description: A basic chart to deploy Enshrouded dedicated servers.
 name: enshrouded-k8s
 type: application
-version: 0.3.0
-appVersion: "1.0.0"
+version: 0.4.0
+appVersion: "1.1.0"
 kubeVersion: ">=1.26.0-0"
 sources:
   - https://github.com/bdelwood/enshrouded-k8s

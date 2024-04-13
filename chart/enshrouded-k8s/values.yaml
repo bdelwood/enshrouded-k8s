@@ -119,6 +119,26 @@ resources:
     memory: 16Gi
     cpu: 6
 
+# -- Liveness and readiness probes.
+probes:
+  # -- Liveness probe
+  liveness: {}
+  #   exec:
+  #     command:
+  #     - sh
+  #     - -c
+  #     - pgrep supervisord > /dev/null || exit 1
+  #   initialDelaySeconds: 30
+  # -- Readiness probe.
+  readiness: {}
+  #   exec:
+  #     command:
+  #     - sh
+  #     - -c
+  #     - supervisorctl status enshrouded-server | grep -q RUNNING
+  #   initialDelaySeconds: 60
+
+
 serviceAccount:
   # -- Specifies whether a service account should be created.
   create: false

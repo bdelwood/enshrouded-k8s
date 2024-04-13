@@ -1,6 +1,6 @@
 # enshrouded-k8s
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
 
 A basic chart to deploy Enshrouded dedicated servers.
 
@@ -52,6 +52,9 @@ Kubernetes: `>=1.26.0-0`
 | persistence.storageClassName | string | `""` | Storage class name for the PVC. |
 | podAnnotations | object | `{}` | Annotations to add to the pod. |
 | podSecurityContext | object | `{}` | Security context for the pod. |
+| probes | object | `{"liveness":{},"readiness":{}}` | Liveness and readiness probes. |
+| probes.liveness | object | `{}` | Liveness probe |
+| probes.readiness | object | `{}` | Readiness probe. |
 | resources.limits | object | `{"cpu":8,"memory":"24Gi"}` | Resource limits (CPU, Memory) for the server. |
 | resources.requests | object | `{"cpu":6,"memory":"16Gi"}` | Resource requests (CPU, Memory) for the server. |
 | securityContext | object | `{}` | Security context for the pod containers. |
