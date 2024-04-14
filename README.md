@@ -31,7 +31,3 @@ By default, the chart will provision a PVC using the default StorageClass. You c
 # Configuration
 
 Full configuration options are detailed in the [Chart readme](/chart/enshrouded-k8s/README.md).
-
-# Roadmap
-
-- [ ] Implement health check/readiness check
