@@ -1,5 +1,9 @@
 # enshrouded-k8s
 
+[![GitHub License](https://img.shields.io/github/license/bdelwood/enshrouded-k8s?style=flat-square)](https://github.com/bdelwood/enshrouded-k8s/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/bdelwood/enshrouded-k8s?style=flat-square)](https://github.com/bdelwood/enshrouded-k8s/releases)
+[![GitHub Downloads](https://img.shields.io/github/downloads/bdelwood/enshrouded-k8s/total?style=flat-square)](https://github.com/bdelwood/enshrouded-k8s/releases)
+
 A Helm chart to deploy an Enshrouded dedicated server. This chart relies on the [`mornedhels/enshrouded-server`](https://github.com/mornedhels/enshrouded-server) image.
 
 # How to use
