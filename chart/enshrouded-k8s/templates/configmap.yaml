@@ -19,6 +19,18 @@ data:
   BACKUP_MAX_COUNT: "{{ .Values.gameServer.backup.max_count }}"
   GAME_BRANCH: "{{ .Values.gameServer.gameBranch }}"
   STEAMCMD_ARGS: "{{ .Values.gameServer.steamcmdArgs }}"
+  {{- range $index, $role := .Values.gameServer.roles }}
+  SERVER_ROLE_{{ $index }}_NAME: "{{ $role.name }}"
+  SERVER_ROLE_{{ $index }}_RESERVED_SLOTS: "{{ $role.reserved_slots }}"
+    {{- range $permission := $role.permissions }}
+  SERVER_ROLE_{{ $index }}_CAN_{{ upper $permission }}: true
+    {{- end }}
+  {{- end }}
+  BOOTSTRAP_HOOK: "{{ .Values.hooks.bootstrap }}"
+  UPDATE_PRE_HOOK: "{{ .Values.hooks.update.pre }}"
+  UPDATE_POST_HOOK: "{{ .Values.hooks.update.post }}"
+  BACKUP_PRE_HOOK: "{{ .Values.hooks.backup.pre }}"
+  BACKUP_POST_HOOK: "{{ .Values.hooks.backup.post }}"
   {{- range $key, $value := .Values.extraEnv }}
   {{ $key }}: "{{ $value }}"
   {{- end }}

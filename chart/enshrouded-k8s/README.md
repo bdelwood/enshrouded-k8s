@@ -1,6 +1,6 @@
 # enshrouded-k8s
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0](https://img.shields.io/badge/AppVersion-1.2.0-informational?style=flat-square)
 
 A basic chart to deploy Enshrouded dedicated servers.
 
@@ -22,22 +22,25 @@ Kubernetes: `>=1.26.0-0`
 | gameServer.backup.cron_expression | string | `"*/15 * * * *"` | Cron expression for backup scheduling. Defines when the backups should be triggered. The default value schedules a backup every 15 minutes. Use standard cron format. |
 | gameServer.backup.directory | string | `"./backup"` | Directory for backups. Supports relative and absolute paths. |
 | gameServer.backup.max_count | int | `0` | Number of backups to keep. When set to 0, never delete backups |
-| gameServer.community.enabled | bool | `true` | Enable if you want your server to show up as a community server. Exposes the Steam query port. |
-| gameServer.community.service.nodePort | int | `nil` | Node port a community server (for NodePort service type). Defaults to Node port for game server + 1 |
-| gameServer.community.service.port | int | `nil` | Service port for a community server. Defaults to the server port + 1 |
 | gameServer.existingSecret | string | `""` | Name of an existing secret for the server password. |
 | gameServer.gameBranch | string | `"public"` | Which Steam branch to use for the game server. |
 | gameServer.logDir | string | `"./logs"` | Directory for logs sets logDirectory in game server config   |
 | gameServer.password | string | `""` | Server password If one is not provided or an existing secret it not provided, one will be generated. |
 | gameServer.players | int | `16` | Number of players allowed on the server concurrently. |
+| gameServer.roles | list | `[]` | A list of roles for the game server. Each role includes a name, an optional password, a list of permissions, and the number of reserved slots. If the password is empty or missing, one will be generated. The role passwords can be provided with an existing secret via `existingSecret`, where the key must have the format `<role-name>-password`. See the [official docs](https://enshrouded.zendesk.com/hc/en-us/articles/19191581489309-Server-Roles-Configuration) for more details on roles. |
 | gameServer.saveDir | string | `"./savegame"` | Directory for game saves sets saveDirectory in game server config |
 | gameServer.serverIP | string | `"0.0.0.0"` | Server IP used Enshrouded server settings |
 | gameServer.serverName | string | `""` | Custom server name. |
 | gameServer.service.nodePort | int | `nil` | Node port for the game server (for NodePort service type). |
-| gameServer.service.port | int | `15636` | Service port for the game server. |
+| gameServer.service.port | int | `15637` | Service port for the game server. |
 | gameServer.steamcmdArgs | string | `"validate"` | Extra arguments to pass to steamcmd when updating. |
 | gameServer.update.check_players | bool | `false` | Check if players are connected before updating.  |
 | gameServer.update.cron_expression | string | `"*/30 * * * *"` | Cron expression for updates. Defines when the update check should run. The default value checks for updates every half hour. Use standard cron format. |
+| hooks.backup.post | string | `""` | Command to run after backup & cleanup |
+| hooks.backup.pre | string | `""` | Command to run before backup & cleanup |
+| hooks.bootstrap | string | `""` | Command to run after general bootstrap |
+| hooks.update.post | string | `""` | Command to run after update |
+| hooks.update.pre | string | `""` | Command to run before update |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.registry | string | `"docker.io"` | Container registry for the image. |
 | image.repository | string | `"mornedhels/enshrouded-server"` | Image repository |

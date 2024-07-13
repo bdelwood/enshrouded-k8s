@@ -54,10 +54,14 @@ spec:
                 secretKeyRef:
                   name: {{ default (include "enshrouded-k8s.fullname" .) .Values.gameServer.existingSecret | quote }}
                   key: server-password
+            {{- range $index, $role := $.Values.gameServer.roles }}
+            - name: SERVER_ROLE_{{ $index }}_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "enshrouded-k8s.fullname" $) $.Values.gameServer.existingSecret | quote }}
+                  key: {{ $role.name }}-password
+            {{- end }}
           ports:
-            - name: gameserver
-              containerPort: 15636
-              protocol: UDP
             - name: queryport
               containerPort: 15637
               protocol: UDP

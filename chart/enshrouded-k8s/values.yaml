@@ -40,20 +40,9 @@ gameServer:
   password: ""
   service:
     # -- Service port for the game server.
-    port: 15636
+    port: 15637
     # -- (int) Node port for the game server (for NodePort service type).
     nodePort: 
-  community:
-    # -- Enable if you want your server to show up as a community server.
-    # Exposes the Steam query port.
-    enabled: true
-    service:
-      # -- (int) Service port for a community server.
-      # Defaults to the server port + 1
-      port: 
-      # -- (int) Node port a community server (for NodePort service type).
-      # Defaults to Node port for game server + 1
-      nodePort: 
   # -- Server IP used Enshrouded server settings
   serverIP: "0.0.0.0"
 
@@ -87,8 +76,35 @@ gameServer:
   gameBranch: "public"
   # -- Extra arguments to pass to steamcmd when updating.
   steamcmdArgs: "validate"
+  # -- A list of roles for the game server.
+  # Each role includes a name, an optional password, a list of permissions, and the number of reserved slots. If the password is empty or missing, one will be generated. The role passwords can be provided with an existing secret via `existingSecret`, where the key must have the format `<role-name>-password`.
+  # See the [official docs](https://enshrouded.zendesk.com/hc/en-us/articles/19191581489309-Server-Roles-Configuration) for more details on roles.
+  roles: []
+    # - name: "default"  # The name of the role.
+    #   password: ""  # (Optional) The password for the role. 
+    #   permissions:  # A list of permissions granted to this role.
+    #     - "kick_ban"  # Allows the role to kick and ban players.
+    #     - "access_inventories"  # Allows the role to access player inventories.
+    #     - "edit_base"  # Allows the role to edit the base.
+    #     - "extend_base"  # Allows the role to extend the base.
+    #   reserved_slots: 16  # The number of slots reserved for this role.
+    # - name: "guests" # A role with no permissions
+    #   reserved_slots: 1 
 
 
+hooks:
+  # -- Command to run after general bootstrap
+  bootstrap: ""
+  update:
+    # -- Command to run before update
+    pre: ""
+    # -- Command to run after update
+    post: ""
+  backup:
+    # -- Command to run before backup & cleanup
+    pre: ""
+    # -- Command to run after backup & cleanup
+    post: ""
 
 # -- Define extra environment variables to pass directly to the container.
 # Any env vars which are set by other values will be overridden.

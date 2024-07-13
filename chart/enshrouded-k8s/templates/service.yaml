@@ -8,22 +8,12 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - name: gameserver
-      port: {{ .Values.gameServer.service.port | int }}
-      protocol: UDP
-      targetPort: gameserver
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ default "" .Values.gameServer.service.nodePort | int }}
-      {{- end }}
-    {{- if .Values.gameServer.community.enabled }}
     - name: queryport
-      port: {{ default (add .Values.gameServer.service.port 1) .Values.gameServer.community.service.port | int }}
+      port: {{ .Values.gameServer.service.port | int }}
       protocol: UDP
       targetPort: queryport
       {{- if eq .Values.service.type "NodePort" }}
-      {{- $defaultNodePort := add (.Values.gameServer.service.nodePort | int) 1 }}
-      nodePort: {{ default $defaultNodePort .Values.gameServer.community.service.nodePort | int }}
+      nodePort: {{ default "" .Values.gameServer.service.nodePort | int }}
       {{- end }}
-    {{- end }}
   selector: 
     {{- include "enshrouded-k8s.selectorLabels" . | nindent 4 }}
