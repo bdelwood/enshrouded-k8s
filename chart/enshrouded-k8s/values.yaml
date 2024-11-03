@@ -89,7 +89,12 @@ gameServer:
     #     - "extend_base"  # Allows the role to extend the base.
     #   reserved_slots: 16  # The number of slots reserved for this role.
     # - name: "guests" # A role with no permissions
-    #   reserved_slots: 1 
+    #   reserved_slots: 1
+  # -- Server difficulty. 
+  # Preset can be `Default \| Relaxed \| Hard \| Survival \| Custom`.
+  # Must be `Custom` to set individual server difficulty settings. Use `extraEnv` and prepend with `SERVER_GS_`.
+  # See container image [docs](https://github.com/mornedhels/enshrouded-server/blob/main/docs/SERVER_DIFFICULTY.md) for more info.
+  difficulty: "Default"
 
 
 hooks:

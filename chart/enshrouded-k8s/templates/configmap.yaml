@@ -26,6 +26,7 @@ data:
   SERVER_ROLE_{{ $index }}_CAN_{{ upper $permission }}: true
     {{- end }}
   {{- end }}
+  SERVER_GS_PRESET: "{{ .Values.gameServer.difficulty }}"
   BOOTSTRAP_HOOK: "{{ .Values.hooks.bootstrap }}"
   UPDATE_PRE_HOOK: "{{ .Values.hooks.update.pre }}"
   UPDATE_POST_HOOK: "{{ .Values.hooks.update.post }}"
